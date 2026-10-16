@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Champ Camp College — Weekly Speaking Events</title>
+<style>
+  :root{--ink:#2b2b2b;--black:#111;--gray:#c9c9c9;--light:#f2f2f2;--mid:#777;--white:#fff}
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.6}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:.02em}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:auto;padding:0 24px}
+  .chev{color:var(--gray);font-weight:900}
+  .sc{font-variant:small-caps;letter-spacing:.12em}
+
+  nav{position:sticky;top:0;background:var(--black);color:#fff;z-index:10}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+  nav .logo{font-weight:800;letter-spacing:.05em;text-decoration:none}
+  nav ul{display:flex;gap:22px;list-style:none;padding:0;font-size:.85rem}
+  nav a{text-decoration:none;opacity:.85}nav a:hover{opacity:1}
+  @media(max-width:760px){nav ul{display:none}}
+
+  .hero{background:var(--ink);color:#fff;padding:90px 0 80px;position:relative;overflow:hidden}
+  .hero:before,.hero:after{content:">";position:absolute;font:900 520px/1 Arial;color:#3a3a3a;right:-40px;top:-80px}
+  .hero:after{right:180px;top:120px;color:#333;font-size:360px}
+  .hero .wrap{position:relative;z-index:1}
+  .hero small{letter-spacing:.3em;font-size:.75rem;color:var(--gray)}
+  .hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:400;margin:12px 0 0}
+  .hero h1 b{display:block;font-family:Arial,sans-serif;font-weight:900;letter-spacing:.04em}
+  .hero p{max-width:520px;margin:20px 0 30px;color:#ddd}
+  .stre{margin-top:46px;display:flex;gap:28px;flex-wrap:wrap;font-size:.85rem;color:var(--gray)}
+  .stre span:first-letter{font-size:1.4em;color:#fff}
+
+  .btn{display:inline-block;padding:12px 26px;border:2px solid #fff;background:#fff;color:var(--black);font-weight:700;text-decoration:none;cursor:pointer;font-size:.9rem;border-radius:0}
+  .btn.ghost{background:transparent;color:#fff;margin-left:8px}
+  .btn.dark{background:var(--black);color:#fff;border-color:var(--black)}
+  .btn.dark.ghost{background:transparent;color:var(--black);margin:0}
+
+  section{padding:72px 0}
+  section.alt{background:var(--light)}
+  .title{text-align:center;font-size:1.9rem;text-transform:uppercase;margin-bottom:8px}
+  .sub{text-align:center;color:var(--mid);margin-bottom:40px}
+  .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:#fff;border:1px solid #ddd;padding:24px}
+  section:not(.alt) .card{background:var(--light);border:0}
+  .card h3{font-size:1.1rem;margin-bottom:6px}
+  .tag{display:inline-block;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;background:var(--black);color:#fff;padding:2px 8px;margin-bottom:10px}
+  .tag.in{background:#fff;color:var(--black);border:1px solid var(--black)}
+
+  .event{display:flex;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid #ddd;flex-wrap:wrap}
+  .date{min-width:70px;text-align:center;background:var(--ink);color:#fff;padding:8px}
+  .date b{display:block;font:700 1.6rem Georgia,serif}
+  .event .info{flex:1;min-width:220px}
+  .event .info h3{font-size:1.05rem}
+  .muted{color:var(--mid);font-size:.9rem}
+
+  .photo{height:150px;background:linear-gradient(135deg,#444,#999);display:flex;align-items:center;justify-content:center;color:#fff;font:700 2.4rem Georgia,serif;margin:-24px -24px 16px}
+
+  .split{display:grid;gap:40px;grid-template-columns:1fr 1fr;align-items:start}
+  @media(max-width:760px){.split{grid-template-columns:1fr}}
+  form{display:grid;gap:12px}
+  input,select,textarea{width:100%;padding:11px;border:1px solid #bbb;font:inherit;background:#fff;border-radius:0}
+  label{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .ok{display:none;background:var(--black);color:#fff;padding:12px;margin-top:10px}
+
+  .quote{border-left:4px solid var(--black);padding:8px 20px;font-family:Georgia,serif;font-style:italic;background:#fff;margin-top:20px}
+
+  .qr{width:180px;height:180px;background:#fff;padding:10px;border:1px solid #ccc;margin:auto}
+  .amounts{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .amounts button{padding:10px 18px;border:2px solid var(--black);background:#fff;font-weight:700;cursor:pointer}
+  .amounts button.on{background:var(--black);color:#fff}
+
+  footer{background:var(--black);color:#bbb;padding:40px 0;font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer b{color:#fff}
+  .demo{background:#fffbe0;border-bottom:1px solid #e6dc8a;text-align:center;font-size:.8rem;padding:6px;color:#554}
+</style>
+</head>
+<body>
+<div class="demo">DEMO — placeholder content. Name, domain, dates, and speakers are TBD.</div>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top">CHAMP CAMP <span class="chev">&gt;&gt;</span> COLLEGE</a>
+  <ul>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#speakers">Speakers</a></li>
+    <li><a href="#register">Register</a></li>
+    <li><a href="#speak">Speak</a></li>
+    <li><a href="#donate">Donate</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <small>WEEKLY VIRTUAL SPEAKER SERIES &bull; FOR STUDENTS</small>
+  <h1>The Champ Camp <b>COLLEGE</b></h1>
+  <p>Weekly business talks from real operators and leaders. Join online from anywhere, or meet in person at Columbia every other month.</p>
+  <a class="btn" href="#register">Student Registration</a>
+  <a class="btn ghost" href="#events">See Upcoming Talks</a>
+  <div class="stre"><span>Strategies</span><span>Techniques</span><span>Execution</span><span>Results</span></div>
+</div></header>
+
+<section id="events"><div class="wrap">
+  <h2 class="title">Upcoming Events</h2>
+  <p class="sub">A new talk every week. Register and we'll email your invite link.</p>
+  <div id="eventList"></div>
+  <p class="muted" style="margin-top:18px">&#9679; In-person meetups at Columbia happen every alternate month.</p>
+</div></section>
+
+<section class="alt" id="speakers"><div class="wrap">
+  <h2 class="title">Speakers</h2>
+  <p class="sub">Lineup and business talks already decided.</p>
+  <div class="grid" id="speakerGrid"></div>
+</div></section>
+
+<section id="register"><div class="wrap split">
+  <div>
+    <h2 class="title" style="text-align:left">Student Registration</h2>
+    <p class="muted">Sign up once to receive every weekly invite, or pick a single session.</p>
+    <div class="quote">"Integrity is the first word in describing the speaker. Insights that stick." &mdash; sample testimonial</div>
+  </div>
+  <form id="regForm">
+    <div><label>Full name</label><input required placeholder="Jane Student"></div>
+    <div><label>Email (invite is sent here)</label><input type="email" required placeholder="you@school.edu"></div>
+    <div><label>School</label><input placeholder="Columbia College"></div>
+    <div><label>Session</label><select id="sessionSel"></select></div>
+    <button class="btn dark" type="submit">Register &amp; get invite</button>
+    <div class="ok" id="regOk">&#10003; You're in! (Demo: an invite email would be sent now.)</div>
+  </form>
+</div></section>
+
+<section class="alt" id="speak"><div class="wrap">
+  <h2 class="title">Be a Speaker or Guest</h2>
+  <p class="sub">Have a story or expertise to share? Or want to attend as a guest?</p>
+  <div class="split">
+    <div class="card"><span class="tag">Speaker</span><h3>Speak at an event</h3>
+      <p class="muted">Tell us about yourself and your proposed talk. We'll follow up with open dates.</p></div>
+    <div class="card"><span class="tag in">Guest</span><h3>Join as a guest</h3>
+      <p class="muted">Industry professionals and community members are welcome to sit in.</p></div>
+  </div>
+  <form id="speakForm" style="max-width:600px;margin:30px auto 0">
+    <div><label>I'd like to</label><select><option>Be a guest speaker</option><option>Attend as a guest</option></select></div>
+    <div><label>Name</label><input required></div>
+    <div><label>Email</label><input type="email" required></div>
+    <div><label>Topic / message</label><textarea rows="3"></textarea></div>
+    <button class="btn dark" type="submit">Submit</button>
+    <div class="ok" id="speakOk">&#10003; Thanks! We'll be in touch. (Demo)</div>
+  </form>
+</div></section>
+
+<section id="inperson"><div class="wrap">
+  <h2 class="title">In Person at Columbia</h2>
+  <p class="sub">One live meeting every alternate month.</p>
+  <div class="grid">
+    <div class="card"><span class="tag in">Next</span><h3>Columbia Meetup</h3><p class="muted">Date &amp; venue TBD</p></div>
+    <div class="card"><h3>Format</h3><p class="muted">Live talk, networking, and Q&amp;A with the speaker.</p></div>
+    <div class="card"><h3>Cadence</h3><p class="muted">Every other month, alternating with online-only months.</p></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap split">
+  <div id="feedback" style="text-align:center">
+    <h2 class="title">Feedback</h2>
+    <p class="sub">Scan after each talk to rate it.</p>
+    <div class="qr" id="qr"></div>
+    <p class="muted" style="margin-top:10px">Placeholder QR — real one links to feedback form.</p>
+  </div>
+  <div id="donate">
+    <h2 class="title">Support Champ Camp</h2>
+    <p class="sub">Champ Camp is a 501(c)(3) nonprofit. Donations fund speakers, venues, and student access.</p>
+    <div class="amounts" id="amounts">
+      <button>$10</button><button class="on">$25</button><button>$50</button><button>$100</button>
+    </div>
+    <button class="btn dark" id="donateBtn">Donate</button>
+    <div class="ok" id="donOk"></div>
+    <p class="muted" style="margin-top:10px">EIN: TBD &bull; Tax-deductible to the extent allowed by law.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><b>CHAMP CAMP COLLEGE</b><br>Domain: TBD &bull; Name: TBD</div>
+  <div><b>Follow</b><br><a href="#">Instagram</a> &bull; <a href="#">Facebook</a> (to be created)</div>
+  <div>&copy; 2026 Champ Camp, a 501(c)(3) nonprofit</div>
+</div></footer>
+
+<script>
+const events=[
+  {d:"Oct 22",t:"TBD Business Talk",s:"Speaker TBD",type:"Virtual"},
+  {d:"Oct 29",t:"TBD Business Talk",s:"Speaker TBD",type:"Virtual"},
+  {d:"Nov 05",t:"Live at Columbia",s:"Speaker TBD",type:"In person"},
+  {d:"Nov 12",t:"TBD Business Talk",s:"Speaker TBD",type:"Virtual"},
+];
+const speakers=["Speaker One","Speaker Two","Speaker Three","Speaker Four"];
+const $=s=>document.querySelector(s);
+
+$("#eventList").innerHTML=events.map((e,i)=>{
+  const [m,day]=e.d.split(" ");
+  return `<div class="event"><div class="date">${m}<b>${day}</b></div>
+  <div class="info"><span class="tag ${e.type=="Virtual"?"":"in"}">${e.type}</span>
+  <h3>${e.t}</h3><div class="muted">${e.s} &bull; 7:00 PM</div></div>
+  <a class="btn dark ghost" href="#register" onclick="$('#sessionSel').value=${i}">Register</a></div>`}).join("");
+
+$("#sessionSel").innerHTML="<option value=''>All weekly sessions</option>"+events.map((e,i)=>`<option value="${i}">${e.d} — ${e.t} (${e.type})</option>`).join("");
+
+$("#speakerGrid").innerHTML=speakers.map(n=>`<div class="card"><div class="photo">${n.split(" ")[1][0]}</div>
+  <h3>${n}</h3><div class="muted">Title, Company</div><p class="muted" style="margin-top:6px">Short bio and talk topic go here.</p></div>`).join("");
+
+$("#regForm").onsubmit=e=>{e.preventDefault();$("#regOk").style.display="block"};
+$("#speakForm").onsubmit=e=>{e.preventDefault();$("#speakOk").style.display="block"};
+
+document.querySelectorAll("#amounts button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#amounts button").forEach(x=>x.classList.remove("on"));b.classList.add("on")});
+$("#donateBtn").onclick=()=>{const o=$("#donOk");o.style.display="block";
+  o.textContent="Demo: would go to payment for "+$("#amounts .on").textContent+" (Stripe/PayPal later)."};
+
+// decorative placeholder QR (not scannable)
+(()=>{let h="",n=21,seed=7;const r=()=>(seed=(seed*9301+49297)%233280)/233280;
+ const f=(x,y)=>(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+  let on;
+  if(f(x,y)){const a=x%14,b=y%14,ring=Math.max(Math.abs(a-3),Math.abs(b-3));on=ring!==2}
+  else on=r()>.5;
+  if(on)h+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}
+ $("#qr").innerHTML=`<svg viewBox="0 0 21 21" width="100%" height="100%" fill="#111">${h}</svg>`})();
+</script>
+</body>
+</html>
