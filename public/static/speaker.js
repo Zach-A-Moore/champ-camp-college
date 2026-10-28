@@ -16,7 +16,7 @@ $("#f").onsubmit = async e => {
     $("#f").classList.add("hidden");
     msg("Thanks! Your application was received. We'll be in touch.");
   } catch (x) {
-    if (x.status === 401) location.href = "/login?next=/speaker";
+    if (x.status === 401) location.href = "login.html?next=speaker.html";
     msg(x.message, true); cap.reset();
   }
 };

@@ -49,10 +49,10 @@ document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
   document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("ghost", x !== b));
   load();
 });
-$("#logout").onclick = async () => { await CCC.api("/api/auth/logout", {}); location.href = "/"; };
+$("#logout").onclick = async () => { await CCC.api("/api/auth/logout", {}); location.href = "index.html"; };
 
 CCC.init().then(c => {
-  if (!c.user || c.user.role !== "admin") { location.href = "/login?next=/admin"; return; }
+  if (!c.user || c.user.role !== "admin") { location.href = "login.html?next=admin.html"; return; }
   $("#who").textContent = c.user.email;
   load();
 });

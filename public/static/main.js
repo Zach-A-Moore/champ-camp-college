@@ -27,7 +27,7 @@ $("#regForm").onsubmit=async e=>{e.preventDefault();
     session:$("#sessionSel").value,captcha:regCap.token()});ok.style.display="block";f.reset();regCap.reset()}
   catch(x){er.textContent=x.message;er.style.display="block";regCap.reset()}};
 CCC.init().then(c=>{if(c.user)$("#navLogin").textContent=c.user.role=="admin"?"Admin":"Account",
-  c.user&&c.user.role=="admin"&&($("#navLogin").href="/admin")});
+  c.user&&c.user.role=="admin"&&($("#navLogin").href="admin.html")});
 
 document.querySelectorAll("#amounts button").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("#amounts button").forEach(x=>x.classList.remove("on"));b.classList.add("on")});

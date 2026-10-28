@@ -17,7 +17,7 @@ $("#f2").onsubmit = async e => {
     const r = await CCC.api("/api/auth/verify", {email: $("#email").value, code: $("#code").value});
     CCC.setCsrf(r.csrf);
     // only allow same-site relative redirects
-    location.href = dest && /^\/[A-Za-z]/.test(dest) ? dest : (r.role === "admin" ? "/admin" : "/speaker");
+    location.href = dest && /^[A-Za-z][\w.\-]*$/.test(dest) ? dest : (r.role === "admin" ? "admin.html" : "speaker.html");
   } catch (x) { msg(x.message, true); }
 };
 $("#back").onclick = () => location.reload();

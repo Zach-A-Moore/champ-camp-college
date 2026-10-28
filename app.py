@@ -220,6 +220,7 @@ def _headers(r):
 PAGES = {"/": "index.html", "/login": "login.html", "/admin": "admin.html", "/speaker": "speaker.html"}
 for _path, _file in PAGES.items():
     app.add_url_rule(_path, _file, lambda f=_file: send_from_directory(BASE / "public", f))
+    app.add_url_rule("/" + _file, "html_" + _file, lambda f=_file: send_from_directory(BASE / "public", f))
 
 
 @app.route("/static/<path:name>")
