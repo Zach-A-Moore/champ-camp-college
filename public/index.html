@@ -63,6 +63,7 @@
   form{display:grid;gap:12px}
   input,select,textarea{width:100%;padding:11px;border:1px solid #bbb;font:inherit;background:#fff;border-radius:0}
   label{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .ok.err{background:#8b1a1a}
   .ok{display:none;background:var(--black);color:#fff;padding:12px;margin-top:10px}
 
   .quote{border-left:4px solid var(--black);padding:8px 20px;font-family:Georgia,serif;font-style:italic;background:#fff;margin-top:20px}
@@ -89,6 +90,7 @@
     <li><a href="#register">Register</a></li>
     <li><a href="#speak">Speak</a></li>
     <li><a href="#donate">Donate</a></li>
+    <li><a href="/login" id="navLogin">Log in</a></li>
   </ul>
 </div></nav>
 
@@ -121,12 +123,14 @@
     <div class="quote">"Integrity is the first word in describing the speaker. Insights that stick." &mdash; sample testimonial</div>
   </div>
   <form id="regForm">
-    <div><label>Full name</label><input required placeholder="Jane Student"></div>
-    <div><label>Email (invite is sent here)</label><input type="email" required placeholder="you@school.edu"></div>
-    <div><label>School</label><input placeholder="Columbia College"></div>
+    <div><label>Full name</label><input name="name" maxlength="100" required placeholder="Jane Student"></div>
+    <div><label>Email (invite is sent here)</label><input name="email" type="email" maxlength="254" required placeholder="you@school.edu"></div>
+    <div><label>School</label><input name="school" maxlength="100" placeholder="Columbia College"></div>
     <div><label>Session</label><select id="sessionSel"></select></div>
+    <div class="cf-slot" id="regCaptcha"></div>
     <button class="btn dark" type="submit">Register &amp; get invite</button>
-    <div class="ok" id="regOk">&#10003; You're in! (Demo: an invite email would be sent now.)</div>
+    <div class="ok" id="regOk">&#10003; You're in! We'll email your invite.</div>
+    <div class="ok err" id="regErr"></div>
   </form>
 </div></section>
 
@@ -139,14 +143,7 @@
     <div class="card"><span class="tag in">Guest</span><h3>Join as a guest</h3>
       <p class="muted">Industry professionals and community members are welcome to sit in.</p></div>
   </div>
-  <form id="speakForm" style="max-width:600px;margin:30px auto 0">
-    <div><label>I'd like to</label><select><option>Be a guest speaker</option><option>Attend as a guest</option></select></div>
-    <div><label>Name</label><input required></div>
-    <div><label>Email</label><input type="email" required></div>
-    <div><label>Topic / message</label><textarea rows="3"></textarea></div>
-    <button class="btn dark" type="submit">Submit</button>
-    <div class="ok" id="speakOk">&#10003; Thanks! We'll be in touch. (Demo)</div>
-  </form>
+  <p style="text-align:center;margin-top:30px"><a class="btn dark" href="/speaker">Apply as a speaker or guest</a></p>
 </div></section>
 
 <section id="inperson"><div class="wrap">
@@ -184,46 +181,8 @@
   <div>&copy; 2026 Champ Camp, a 501(c)(3) nonprofit</div>
 </div></footer>
 
-<script>
-const events=[
-  {d:"Oct 22",t:"TBD Business Talk",s:"Speaker TBD",type:"Virtual"},
-  {d:"Oct 29",t:"TBD Business Talk",s:"Speaker TBD",type:"Virtual"},
-  {d:"Nov 05",t:"Live at Columbia",s:"Speaker TBD",type:"In person"},
-  {d:"Nov 12",t:"TBD Business Talk",s:"Speaker TBD",type:"Virtual"},
-];
-const speakers=["Speaker One","Speaker Two","Speaker Three","Speaker Four"];
-const $=s=>document.querySelector(s);
-
-$("#eventList").innerHTML=events.map((e,i)=>{
-  const [m,day]=e.d.split(" ");
-  return `<div class="event"><div class="date">${m}<b>${day}</b></div>
-  <div class="info"><span class="tag ${e.type=="Virtual"?"":"in"}">${e.type}</span>
-  <h3>${e.t}</h3><div class="muted">${e.s} &bull; 7:00 PM</div></div>
-  <a class="btn dark ghost" href="#register" onclick="$('#sessionSel').value=${i}">Register</a></div>`}).join("");
-
-$("#sessionSel").innerHTML="<option value=''>All weekly sessions</option>"+events.map((e,i)=>`<option value="${i}">${e.d} — ${e.t} (${e.type})</option>`).join("");
-
-$("#speakerGrid").innerHTML=speakers.map(n=>`<div class="card"><div class="photo">${n.split(" ")[1][0]}</div>
-  <h3>${n}</h3><div class="muted">Title, Company</div><p class="muted" style="margin-top:6px">Short bio and talk topic go here.</p></div>`).join("");
-
-$("#regForm").onsubmit=e=>{e.preventDefault();$("#regOk").style.display="block"};
-$("#speakForm").onsubmit=e=>{e.preventDefault();$("#speakOk").style.display="block"};
-
-document.querySelectorAll("#amounts button").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll("#amounts button").forEach(x=>x.classList.remove("on"));b.classList.add("on")});
-$("#donateBtn").onclick=()=>{const o=$("#donOk");o.style.display="block";
-  o.textContent="Demo: would go to payment for "+$("#amounts .on").textContent+" (Stripe/PayPal later)."};
-
-// decorative placeholder QR (not scannable)
-(()=>{let h="",n=21,seed=7;const r=()=>(seed=(seed*9301+49297)%233280)/233280;
- const f=(x,y)=>(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);
- for(let y=0;y<n;y++)for(let x=0;x<n;x++){
-  let on;
-  if(f(x,y)){const a=x%14,b=y%14,ring=Math.max(Math.abs(a-3),Math.abs(b-3));on=ring!==2}
-  else on=r()>.5;
-  if(on)h+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}
- $("#qr").innerHTML=`<svg viewBox="0 0 21 21" width="100%" height="100%" fill="#111">${h}</svg>`})();
-</script>
+<script src="/static/common.js"></script>
+<script src="/static/main.js"></script>
 </body>
 </html>
 

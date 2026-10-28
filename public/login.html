@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in — Champ Camp College</title><link rel="stylesheet" href="/static/page.css"></head>
+<body>
+<div class="bar"><a href="/">CHAMP CAMP &gt;&gt; COLLEGE</a></div>
+<div class="box">
+  <h1>Log in</h1>
+  <p class="muted">No password needed. We'll email you a 6-digit code to verify your address.</p>
+  <form id="f1">
+    <div><label for="email">Email</label><input id="email" type="email" maxlength="254" autocomplete="email" required></div>
+    <div id="cap"></div>
+    <button class="btn" type="submit">Send code</button>
+  </form>
+  <form id="f2" class="hidden">
+    <div><label for="code">6-digit code</label><input id="code" inputmode="numeric" pattern="\d{6}" maxlength="6" autocomplete="one-time-code" required></div>
+    <button class="btn" type="submit">Verify &amp; log in</button>
+    <button class="btn ghost" type="button" id="back">Use a different email</button>
+  </form>
+  <div class="msg" id="msg"></div>
+</div>
+<script src="/static/common.js"></script>
+<script src="/static/login.js"></script>
+</body></html>

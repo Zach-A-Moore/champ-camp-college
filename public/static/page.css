@@ -1,0 +1,23 @@
+*{box-sizing:border-box;margin:0}
+body{font-family:"Helvetica Neue",Arial,sans-serif;color:#2b2b2b;background:#f2f2f2;line-height:1.6}
+h1,h2{font-family:Georgia,serif}
+a{color:inherit}
+.bar{background:#111;color:#fff;padding:16px 24px;display:flex;justify-content:space-between}
+.bar a{text-decoration:none;font-weight:800;letter-spacing:.05em}
+.box{max-width:480px;margin:48px auto;background:#fff;padding:32px;border:1px solid #ddd}
+.box.wide{max-width:1100px}
+form{display:grid;gap:12px;margin-top:16px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #bbb;font:inherit;background:#fff}
+label{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.btn{padding:12px 24px;border:2px solid #111;background:#111;color:#fff;font-weight:700;cursor:pointer;font-size:.9rem}
+.btn.ghost{background:#fff;color:#111}
+.btn.sm{padding:4px 10px;font-size:.75rem}
+.msg{display:none;padding:12px;color:#fff;background:#111;margin-top:10px}
+.msg.err{background:#8b1a1a}
+.muted{color:#777;font-size:.9rem}
+.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left;vertical-align:top}
+th{text-transform:uppercase;font-size:.7rem;letter-spacing:.1em}
+td.topic{max-width:340px;white-space:pre-wrap;word-break:break-word}
+.hidden{display:none}

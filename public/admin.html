@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Champ Camp College</title><link rel="stylesheet" href="/static/page.css"></head>
+<body>
+<div class="bar"><a href="/">CHAMP CAMP &gt;&gt; COLLEGE — ADMIN</a><span><span id="who"></span> <button class="btn ghost sm" id="logout">Log out</button></span></div>
+<div class="box wide">
+  <div class="tabs" id="tabs">
+    <button class="btn" data-t="applications">Speaker applications</button>
+    <button class="btn ghost" data-t="registrations">Student registrations</button>
+    <button class="btn ghost" data-t="users">Logged-in users</button>
+    <button class="btn ghost" data-t="audit">Login &amp; activity log</button>
+  </div>
+  <div style="overflow-x:auto"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  <div class="msg" id="msg"></div>
+</div>
+<script src="/static/common.js"></script>
+<script src="/static/admin.js"></script>
+</body></html>
