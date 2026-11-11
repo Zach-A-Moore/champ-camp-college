@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Log in — Champ Camp College</title><link rel="stylesheet" href="static/page.css"></head>
+<title>Log in — Champ Camp College</title>
+<meta name="description" content="Log in to Champ Camp College with a one-time code sent to your email.">
+<link rel="stylesheet" href="static/page.css"></head>
 <body>
-<div class="bar"><a href="index.html">CHAMP CAMP &gt;&gt; COLLEGE</a></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header id="site-header" class="site-header"></header>
+<main id="main-content" tabindex="-1">
 <div class="box">
   <h1>Log in</h1>
-  <p class="muted">No password needed. We'll email you a 6-digit code to verify your address.</p>
-  <form id="f1">
-    <div><label for="email">Email</label><input id="email" type="email" maxlength="254" autocomplete="email" required></div>
-    <div id="cap"></div>
-    <button class="btn" type="submit">Send code</button>
+  <p class="muted" id="intro">No password needed. We'll email you a 6-digit code.</p>
+  <p class="info-box" id="why">Logging in lets you apply to speak, track your application, and manage your registrations. <b>Students don't need an account to register for talks.</b> <a href="index.html#register">Register here</a>.</p>
+
+  <form id="f1" novalidate>
+    <div class="field"><label for="email">Email</label>
+      <input id="email" type="email" maxlength="254" autocomplete="email" required aria-describedby="email-err">
+      <span class="field-error" id="email-err"></span></div>
+    <div class="cf-slot" id="cap"></div>
+    <button class="btn" type="submit">Email me a code</button>
   </form>
-  <form id="f2" class="hidden">
-    <div><label for="code">6-digit code</label><input id="code" inputmode="numeric" pattern="\d{6}" maxlength="6" autocomplete="one-time-code" required></div>
-    <button class="btn" type="submit">Verify &amp; log in</button>
-    <button class="btn ghost" type="button" id="back">Use a different email</button>
+
+  <form id="f2" hidden novalidate>
+    <p id="sentTo" aria-live="polite"></p>
+    <div class="field"><label for="code">6-digit code</label>
+      <input id="code" class="code-input" inputmode="numeric" pattern="\d{6}" maxlength="6" autocomplete="one-time-code" required aria-describedby="code-hint">
+      <span class="hint" id="code-hint">The code expires in 10 minutes. Paste it or type it; we'll log you in automatically.</span></div>
+    <button class="btn" type="submit">Verify and log in</button>
+    <div class="btn-row">
+      <button class="btn ghost sm" type="button" id="resend">Send a new code</button>
+      <button class="btn ghost sm" type="button" id="back">Use a different email</button>
+    </div>
   </form>
-  <div class="msg" id="msg"></div>
+
+  <div id="already" hidden>
+    <p id="alreadyText"></p>
+    <div class="btn-row"><a class="btn" href="account.html">Go to my account</a><button class="btn ghost" type="button" id="alreadyOut">Log out</button></div>
+  </div>
+
+  <div class="msg" id="msg" aria-live="polite"></div>
 </div>
+</main>
+<footer id="site-footer" class="site-footer"></footer>
 <script src="static/common.js"></script>
 <script src="static/login.js"></script>
 </body></html>

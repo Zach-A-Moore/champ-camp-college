@@ -1,18 +1,89 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin — Champ Camp College</title><link rel="stylesheet" href="static/page.css"></head>
+<title>Admin — Champ Camp College</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="static/page.css"></head>
 <body>
-<div class="bar"><a href="index.html">CHAMP CAMP &gt;&gt; COLLEGE — ADMIN</a><span><span id="who"></span> <button class="btn ghost sm" id="logout">Log out</button></span></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header id="site-header" class="site-header"></header>
+<main id="main-content" tabindex="-1">
 <div class="box wide">
-  <div class="tabs" id="tabs">
-    <button class="btn" data-t="applications">Speaker applications</button>
-    <button class="btn ghost" data-t="registrations">Student registrations</button>
-    <button class="btn ghost" data-t="users">Logged-in users</button>
-    <button class="btn ghost" data-t="audit">Login &amp; activity log</button>
+  <h1>Admin dashboard</h1>
+  <p class="muted" id="who">Checking access…</p>
+  <div id="denied" hidden>
+    <p>You're logged in, but this account doesn't have admin access.</p>
+    <p><a class="btn" href="account.html">Go to my account</a></p>
   </div>
-  <div style="overflow-x:auto"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
-  <div class="msg" id="msg"></div>
+
+  <div id="dash" hidden>
+    <div class="tabs" role="tablist" aria-label="Admin sections" id="tabs">
+      <button role="tab" id="tab-overview" aria-controls="panel-overview" data-t="overview">Overview</button>
+      <button role="tab" id="tab-applications" aria-controls="panel-applications" data-t="applications">Applications</button>
+      <button role="tab" id="tab-events" aria-controls="panel-events" data-t="events">Talks</button>
+      <button role="tab" id="tab-registrations" aria-controls="panel-registrations" data-t="registrations">Registrations</button>
+      <button role="tab" id="tab-users" aria-controls="panel-users" data-t="users">Users</button>
+      <button role="tab" id="tab-audit" aria-controls="panel-audit" data-t="audit">Activity log</button>
+    </div>
+    <div class="msg" id="msg" aria-live="polite"></div>
+
+    <div class="panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+      <div class="stats" id="stats"></div>
+      <h2>Next talk</h2>
+      <div id="nextEvent"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-applications" aria-labelledby="tab-applications" tabindex="0" hidden>
+      <div class="toolbar">
+        <div class="field"><label for="appStatus">Status</label>
+          <select id="appStatus"><option value="">All</option><option value="pending" selected>Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="withdrawn">Withdrawn</option></select></div>
+        <div class="field"><label for="appKind">Type</label>
+          <select id="appKind"><option value="">All</option><option value="speaker">Speaker</option><option value="guest">Guest</option></select></div>
+        <div class="field grow"><label for="appQ">Search</label><input id="appQ" type="search" placeholder="Name, email or topic"></div>
+      </div>
+      <div class="table-scroll" id="appTable"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-events" aria-labelledby="tab-events" tabindex="0" hidden>
+      <div class="toolbar"><button class="btn" type="button" id="newEvent">Add a talk</button></div>
+      <form id="eventForm" class="event-form" hidden novalidate>
+        <h2 class="full" id="eventFormTitle">Add a talk</h2>
+        <div class="field full"><label for="evTitle">Talk title *</label><input id="evTitle" maxlength="150" required></div>
+        <div class="field"><label for="evSpeaker">Speaker name *</label><input id="evSpeaker" maxlength="100" required></div>
+        <div class="field"><label for="evSpeakerTitle">Speaker role / company</label><input id="evSpeakerTitle" maxlength="150"></div>
+        <div class="field"><label for="evStart">Date and time (your time zone) *</label><input id="evStart" type="datetime-local" required></div>
+        <div class="field"><label for="evDuration">Length (minutes)</label><input id="evDuration" type="number" min="15" max="480" value="60"></div>
+        <div class="field full"><label for="evSummary">One-line summary (shown to students)</label><textarea id="evSummary" rows="3" maxlength="1000"></textarea></div>
+        <div class="field full"><label for="evJoin">Join link (only emailed to registrants)</label><input id="evJoin" type="url" maxlength="500" placeholder="https://"></div>
+        <div class="field"><label for="evStatus">Status</label>
+          <select id="evStatus"><option value="draft">Draft (hidden)</option><option value="published">Published</option><option value="cancelled">Cancelled</option></select></div>
+        <div class="field" id="notifyWrap" hidden><label class="demo-captcha" for="evNotify"><input type="checkbox" id="evNotify" checked> Email registrants that it's cancelled</label></div>
+        <div class="btn-row full"><button class="btn" type="submit">Save talk</button><button class="btn ghost" type="button" id="cancelEdit">Close</button></div>
+      </form>
+      <div class="table-scroll" id="eventTable"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-registrations" aria-labelledby="tab-registrations" tabindex="0" hidden>
+      <div class="toolbar">
+        <div class="field"><label for="regStatus">Show</label><select id="regStatus">
+          <option value="active" selected>Registered (paid or pre-fee)</option><option value="paid">Paid</option>
+          <option value="pending">Started checkout, not paid</option><option value="cancelled">Cancelled</option><option value="all">Everything</option></select></div>
+        <div class="field grow"><label for="regQ">Search</label><input id="regQ" type="search" placeholder="Name, email or school"></div>
+        <button class="btn ghost" type="button" id="exportCsv">Export CSV</button>
+      </div>
+      <div class="table-scroll" id="regTable"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-users" aria-labelledby="tab-users" tabindex="0" hidden>
+      <div class="table-scroll" id="userTable"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-audit" aria-labelledby="tab-audit" tabindex="0" hidden>
+      <div class="table-scroll" id="auditTable"></div>
+    </div>
+  </div>
 </div>
+</main>
+<footer id="site-footer" class="site-footer"></footer>
 <script src="static/common.js"></script>
 <script src="static/admin.js"></script>
 </body></html>

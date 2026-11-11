@@ -1,0 +1,54 @@
+# Render Blueprint for Champ Camp College (Render dashboard: New > Blueprint, then pick this repository).
+# Secrets marked "sync: false" are entered in the Render dashboard during setup and never stored in Git.
+services:
+  - type: web
+    name: champcampcollege
+    runtime: python
+    plan: starter                # paid instance: required for the persistent disk below
+    region: ohio
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    # One worker on purpose: SQLite on one disk and in-memory rate limits.
+    startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 60 --bind 0.0.0.0:$PORT
+    healthCheckPath: /healthz
+    disk:
+      name: ccc-data
+      mountPath: /var/data
+      sizeGB: 1
+    domains:
+      - champcampcollege.com
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: CCC_ENV
+        value: prod
+      - key: CCC_DB
+        value: /var/data/ccc.db
+      - key: PUBLIC_URL
+        value: https://champcampcollege.com
+      - key: SECRET_KEY
+        generateValue: true
+      - key: REGISTRATION_PRICE_CENTS
+        value: "500"
+      - key: ADMIN_EMAILS
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: TURNSTILE_SITE_KEY
+        sync: false
+      - key: TURNSTILE_SECRET_KEY
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
